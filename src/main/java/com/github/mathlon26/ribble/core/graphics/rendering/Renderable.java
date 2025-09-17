@@ -14,7 +14,6 @@ public class Renderable {
         this.mesh = mesh;
         this.shaderProgram = shaderProgram;
         this.drawMode = drawMode;
-        this.shaderProgram.linkAndValidate();
     }
 
     /**

@@ -7,15 +7,16 @@ import static org.lwjgl.opengl.GL20.*;
 
 public class ShaderProgram {
     private final int programId;
-    private List<Shader> shaderList;
+    private final List<Shader> shaderList;
 
     public ShaderProgram(Shader... shaders) {
         this.shaderList = new ArrayList<>();
         programId = glCreateProgram();
         addShaders(shaders);
+        linkAndValidate();
     }
 
-    public void addShader(Shader shader) {
+    private void addShader(Shader shader) {
         if (shader.getShaderId() == 0) {
             shader.compile();
         }
@@ -23,14 +24,14 @@ public class ShaderProgram {
         glAttachShader(programId, shader.getShaderId());
     }
 
-    public void addShaders(Shader... shaders) {
+    private void addShaders(Shader... shaders) {
         for (Shader shader : shaders) {
             addShader(shader);
         }
     }
 
-    public void linkAndValidate() {
-        link(); // existing link method
+    private void linkAndValidate() {
+        link();
 
         glValidateProgram(programId);
         int validateStatus = glGetProgrami(programId, GL_VALIDATE_STATUS);
@@ -38,17 +39,6 @@ public class ShaderProgram {
             String log = glGetProgramInfoLog(programId);
             System.err.println("Shader program validation warning: " + log);
         }
-    }
-
-    public void use() {
-        glUseProgram(programId);
-    }
-
-    public void delete() {
-        for (Shader shader : this.shaderList) {
-            shader.delete();
-        }
-        glDeleteProgram(programId);
     }
 
     private void link() {
@@ -59,5 +49,23 @@ public class ShaderProgram {
             String log = glGetProgramInfoLog(programId);
             throw new RuntimeException("Failed to link shader program: " + log);
         }
+    }
+
+    public void use() {
+        glUseProgram(programId);
+    }
+
+    public void unUse() {
+        glUseProgram(0);
+    }
+
+    public void delete() {
+        for (Shader shader : this.shaderList) {
+            shader.delete();
+        }
+        glDeleteProgram(programId);
+    }
+
+    public void setUniform(String key, int unit) {
     }
 }
