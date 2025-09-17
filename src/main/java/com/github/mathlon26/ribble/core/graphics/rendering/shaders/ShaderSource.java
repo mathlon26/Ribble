@@ -1,4 +1,4 @@
-package com.github.mathlon26.ribble.core.graphics.shaders;
+package com.github.mathlon26.ribble.core.graphics.rendering.shaders;
 
 import java.io.BufferedReader;
 import java.io.IOException;

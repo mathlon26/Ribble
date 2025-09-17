@@ -1,6 +1,7 @@
 package com.github.mathlon26.ribble.core.graphics.rendering;
 
-import com.github.mathlon26.ribble.core.graphics.shaders.ShaderProgram;
+import com.github.mathlon26.ribble.core.graphics.rendering.modeling.Mesh;
+import com.github.mathlon26.ribble.core.graphics.rendering.shaders.ShaderProgram;
 
 import static org.lwjgl.opengl.GL11.*;
 

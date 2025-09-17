@@ -2,23 +2,17 @@ package com.github.mathlon26.ribble;
 
 import com.github.mathlon26.ribble.core.Window;
 import com.github.mathlon26.ribble.core.editor.LevelEditorScene;
-import com.github.mathlon26.ribble.core.graphics.Scene;
 import com.github.mathlon26.ribble.core.graphics.SceneManager;
 import com.github.mathlon26.ribble.core.graphics.rendering.*;
-import com.github.mathlon26.ribble.core.graphics.shaders.*;
-import com.github.mathlon26.ribble.event.listener.KeyBoardKey;
+import com.github.mathlon26.ribble.core.graphics.rendering.modeling.Indices;
+import com.github.mathlon26.ribble.core.graphics.rendering.modeling.Mesh;
+import com.github.mathlon26.ribble.core.graphics.rendering.modeling.Vertices;
+import com.github.mathlon26.ribble.core.graphics.rendering.shaders.FragmentShader;
+import com.github.mathlon26.ribble.core.graphics.rendering.shaders.ShaderProgram;
+import com.github.mathlon26.ribble.core.graphics.rendering.shaders.VertexShader;
 import com.github.mathlon26.ribble.event.listener.KeyListener;
 import com.github.mathlon26.ribble.event.listener.MouseListener;
 import com.github.mathlon26.ribble.util.Time;
-import kotlin.jvm.internal.Lambda;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.CharBuffer;
-import java.util.Map;
-
-import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 
 public class GameApplication {
 

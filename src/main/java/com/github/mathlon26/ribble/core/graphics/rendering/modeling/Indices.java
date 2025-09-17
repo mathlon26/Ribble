@@ -1,4 +1,4 @@
-package com.github.mathlon26.ribble.core.graphics.rendering;
+package com.github.mathlon26.ribble.core.graphics.rendering.modeling;
 
 public class Indices {
     private int[] data;

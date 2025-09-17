@@ -1,4 +1,4 @@
-package com.github.mathlon26.ribble.core.graphics.rendering;
+package com.github.mathlon26.ribble.core.graphics.rendering.modeling;
 
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;

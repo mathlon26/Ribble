@@ -1,4 +1,4 @@
-package com.github.mathlon26.ribble.core.graphics.shaders;
+package com.github.mathlon26.ribble.core.graphics.rendering.shaders;
 
 
 import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
@@ -8,8 +8,6 @@ import static org.lwjgl.opengl.GL40.GL_TESS_CONTROL_SHADER;
 import static org.lwjgl.opengl.GL40.GL_TESS_EVALUATION_SHADER;
 import static org.lwjgl.opengl.GL43.GL_COMPUTE_SHADER;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.Nullable;
 
 public enum ShaderType {

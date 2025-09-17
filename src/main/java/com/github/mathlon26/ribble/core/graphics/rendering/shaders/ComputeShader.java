@@ -1,6 +1,4 @@
-package com.github.mathlon26.ribble.core.graphics.shaders;
-
-import java.io.IOException;
+package com.github.mathlon26.ribble.core.graphics.rendering.shaders;
 
 public class ComputeShader extends Shader{
 
