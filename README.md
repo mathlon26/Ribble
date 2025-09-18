@@ -5,7 +5,7 @@ Here’s a draft **README.md** you can put into your `Ribble` GitHub repo. Feel 
 [![GitHub forks](https://img.shields.io/github/forks/mathlon26/Ribble)](https://github.com/mathlon26/Ribble/network)\
 [![GitHub stars](https://img.shields.io/github/stars/mathlon26/Ribble)](https://github.com/mathlon26/Ribble/stargazers)\
 [![GitHub issues](https://img.shields.io/github/issues/mathlon26/Ribble)](https://github.com/mathlon26/Ribble/issues) \
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 **Ribble** is a (student) Java game engine project, designed as a learning / experimental engine for 3D graphics, rendering, input handling, and entity systems.
