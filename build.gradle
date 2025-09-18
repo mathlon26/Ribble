@@ -32,14 +32,16 @@ repositories {
 
 sourceSets {
     main {
+        java {
+            srcDirs = ['src/main/java']
+            exclude 'com/github/mathlon26/ribble_deprecated/**'
+        }
         resources {
             srcDirs = ['src/main/resources']
         }
-        java {
-            exclude 'com/github/mathlon26/ribble_deprecated/**'
-        }
     }
 }
+
 
 
 dependencies {
@@ -47,10 +49,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.40'
 
     implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
-
-
-    implementation 'org.jogamp.jogl:jogl-all-main:2.4.0'
-    implementation 'org.jogamp.gluegen:gluegen-rt-main:2.4.0'
 
     implementation "org.lwjgl:lwjgl-glfw"
     implementation "org.lwjgl:lwjgl-opengl"
