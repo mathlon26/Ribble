@@ -153,8 +153,7 @@ public class Vector2D {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Vector2D)) return false;
-        Vector2D other = (Vector2D) obj;
+        if (!(obj instanceof Vector2D other)) return false;
         return Double.compare(x, other.x) == 0 && Double.compare(y, other.y) == 0;
     }
 }
