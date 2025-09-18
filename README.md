@@ -1,5 +1,3 @@
-Here’s a draft **README.md** you can put into your `Ribble` GitHub repo. Feel free to tweak to match exact details or tone.
-
 # Ribble
 [![Build](https://github.com/mathlon26/Ribble/actions/workflows/gradle.yml/badge.svg)](https://github.com/mathlon26/Ribble/actions/workflows/gradle.yml)\
 [![GitHub forks](https://img.shields.io/github/forks/mathlon26/Ribble)](https://github.com/mathlon26/Ribble/network)\
