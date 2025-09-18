@@ -1,7 +1,13 @@
 package com.github.mathlon26.ribble;
 
+import com.github.mathlon26.ribble.core.RibbleGame;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello Ribblers");
+        try {
+            new RibbleGame().start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
