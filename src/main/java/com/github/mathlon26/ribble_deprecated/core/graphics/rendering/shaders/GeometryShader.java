@@ -1,0 +1,12 @@
+package com.github.mathlon26.ribble_deprecated.core.graphics.rendering.shaders;
+
+public class GeometryShader extends Shader{
+
+    public GeometryShader(String sourcePath, boolean isMultiShaderFile) {
+        super(new ShaderSource(sourcePath, ShaderType.FRAGMENT, isMultiShaderFile));
+    }
+
+    public GeometryShader(String sourcePath) {
+        this(sourcePath, false);
+    }
+}
