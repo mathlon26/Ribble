@@ -65,3 +65,5 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+println "LWJGL natives being used: $lwjglNatives"
