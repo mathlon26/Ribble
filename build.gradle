@@ -65,10 +65,6 @@ dependencies {
     // JOML
     implementation "org.joml:joml:$jomlVersion"
 
-    // JOGL (for ribble_deprecated)
-    implementation "org.jogamp.jogl:jogl-all-main:$joglVersion"
-    implementation "org.jogamp.gluegen:gluegen-rt-main:$gluegenVersion"
-
     // JUnit 5
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
