@@ -20,7 +20,8 @@ public class Engine {
     }
 
     public void start() {
-        m_window = new Window(new Vector2D(1920, 1080), "Ribble Game Engine", Color.Red());
+        Config.init();
+        m_window = new Window();
         m_gameLoop = new GameLoop(m_window);
 
         m_window.show();

@@ -6,6 +6,10 @@ public class Color {
     private Vector4D rgba;
 
     // Constructors
+    public Color(Vector4D rgba) {
+        this.rgba = rgba;
+    }
+
     public Color(float r, float g, float b, float a) {
         this.rgba = new Vector4D(r, g, b, a);
     }
@@ -19,7 +23,7 @@ public class Color {
     }
 
     public Color() {
-        this(0f, 0f, 0f, 1f); // default black
+        this(0);
     }
 
     // Getters
@@ -27,12 +31,14 @@ public class Color {
     public float getG() { return (float) rgba.getY(); }
     public float getB() { return (float) rgba.getZ(); }
     public float getA() { return (float) rgba.getW(); }
+    public void getRgba(Vector4D c) { rgba = c; }
 
     // Setters
     public void setR(float r) { rgba.setX(r); }
     public void setG(float g) { rgba.setY(g); }
     public void setB(float b) { rgba.setZ(b); }
     public void setA(float a) { rgba.setW(a); }
+    public void setRgba(Vector4D c) { rgba = c; }
 
     public void set(float r, float g, float b, float a) { rgba.setValues(r, g, b, a); }
     public void set(float r, float g, float b) { set(r, g, b, 1f); }
@@ -79,10 +85,6 @@ public class Color {
         return rgba.equals(other.rgba);
     }
 
-    // Constructor from Vector4D
-    public Color(Vector4D vec) {
-        this.rgba = vec;
-    }
 
     public static Color Red() {
         return new Color(1f, 0f, 0f);

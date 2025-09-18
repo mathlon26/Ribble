@@ -8,12 +8,12 @@ public class GameLoop {
     private final Engine m_engine;
     private final Window m_window;
     private boolean m_running;
-    private int targetFPS;
+    private int m_targetFPS;
 
     public GameLoop(Window window, int targetFPS) {
         m_engine = Engine.getInstance();
         m_window = window;
-        setTargetFPS(targetFPS);
+        m_targetFPS = Config.get("targetFPS", Integer.class);
         m_running = false;
     }
 
@@ -21,13 +21,8 @@ public class GameLoop {
         this(window, Ribble.FPS_60);
     }
 
-    public void setTargetFPS(int fps) {
-        if (fps <= 0) throw new IllegalArgumentException("FPS must be positive.");
-        this.targetFPS = fps;
-    }
-
     public int getTargetFPS() {
-        return targetFPS;
+        return m_targetFPS;
     }
 
     public void start() {
@@ -42,7 +37,7 @@ public class GameLoop {
             GameTime.update();
             accumulator += GameTime.getDeltaTime();
 
-            final double frameTime = 1.0 / targetFPS;
+            final double frameTime = 1.0 / Config.get("targetFPS", Integer.class);;
 
             while (accumulator >= frameTime) {
                 update();

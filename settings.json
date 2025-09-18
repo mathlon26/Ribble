@@ -1,0 +1,18 @@
+{
+  "windowSize": {
+    "x": 1024.0,
+    "y": 768.0
+  },
+  "masterVolume": 1.0,
+  "vSync": true,
+  "windowTitle": "Ribble Game Engine",
+  "windowBgColor": {
+    "rgba": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "w": 1.0
+    }
+  },
+  "targetFPS": 60.0
+}

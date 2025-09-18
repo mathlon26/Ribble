@@ -1,5 +1,6 @@
 package com.github.mathlon26.ribble.graphics;
 
+import com.github.mathlon26.ribble.core.Config;
 import com.github.mathlon26.ribble.math.Vector2D;
 import com.github.mathlon26.ribble.math.physics.Color;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -20,10 +21,10 @@ public class Window {
     private GLFWErrorCallback m_glfwErrorCallback;
     private GLFWFramebufferSizeCallback m_frameBufferSizeCallback;
 
-    public Window(Vector2D size, String title, Color bgColor) {
-        m_size = size;
-        m_title = title;
-        m_bgColor = bgColor;
+    public Window() {
+        m_size = Config.get("windowSize", Vector2D.class);
+        m_title = Config.get("windowTitle", String.class);
+        m_bgColor = Config.get("windowBgColor", Color.class);
     }
 
     public int getHeight() {
