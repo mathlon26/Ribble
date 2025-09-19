@@ -26,7 +26,4 @@ public class Ribble {
     // Audio
     public static float AUDIO_SET_MAX = 1.0f;
     public static float AUDIO_SET_ZERO = 0.0f;
-
-    // Logging
-    public static String DEFAULT_LOG_FILE_PATH = "run.log";
 }

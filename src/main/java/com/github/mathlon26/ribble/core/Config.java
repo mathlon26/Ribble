@@ -8,7 +8,9 @@ public class Config {
     private static final SettingsManager settings = SettingsManager.getInstance();
 
     static {
-        settings.createDefaultSetting("windowSize", Ribble.WINDOW_SIZE_XGA);
+        settings.createDefaultSetting("settingsPath", "settings.json");
+        settings.createDefaultSetting("logPath", "run.log");
+        settings.createDefaultSetting("windowSize", Ribble.WINDOW_SIZE_HD);
         settings.createDefaultSetting("windowTitle", "Ribble Game Engine");
         settings.createDefaultSetting("windowBgColor", Color.Black());
         settings.createDefaultSetting("targetFPS", Ribble.FPS_60);

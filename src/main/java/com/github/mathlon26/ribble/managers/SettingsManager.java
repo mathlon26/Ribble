@@ -1,5 +1,6 @@
 package com.github.mathlon26.ribble.managers;
 
+import com.github.mathlon26.ribble.core.Config;
 import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -13,9 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SettingsManager {
-
-    private static final String DEFAULT_FILE_PATH = "settings.json";
-
     // Singleton instance
     private static SettingsManager instance;
 
@@ -55,7 +53,7 @@ public class SettingsManager {
     }
 
     public void loadSettings() {
-        File file = new File(DEFAULT_FILE_PATH);
+        File file = new File(Config.get("settingsPath", String.class));
         currentSettings.clear();
 
         Map<String, Object> loaded = null;
@@ -90,7 +88,7 @@ public class SettingsManager {
 
     // Save settings to JSON file
     public void saveSettings() {
-        try (FileWriter writer = new FileWriter(DEFAULT_FILE_PATH)) {
+        try (FileWriter writer = new FileWriter(Config.get("settingsPath", String.class))) {
             gson.toJson(currentSettings, writer);
         } catch (IOException e) {
             ExceptionHandler.raise(RuntimeException.class, "SettingsManager::saveSettings -> IOException -> RuntimeException " + e);

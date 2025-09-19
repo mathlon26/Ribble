@@ -22,7 +22,7 @@ public class Engine {
 
     public void start() {
         Config.init();
-        m_logger = Logger.getInstance(Ribble.DEFAULT_LOG_FILE_PATH);
+        m_logger = Logger.getInstance(Config.get("logPath", String.class));
         m_logger.info("Starting Ribble Game Engine");
         m_window = new Window();
         m_gameLoop = new GameLoop(m_window);
