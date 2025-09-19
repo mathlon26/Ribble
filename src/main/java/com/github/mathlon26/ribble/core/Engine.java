@@ -29,7 +29,6 @@ public class Engine {
 
         m_window.show();
         m_gameLoop.start();
-
     }
 
     public void stop() {
