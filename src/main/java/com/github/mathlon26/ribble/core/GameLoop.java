@@ -37,8 +37,7 @@ public class GameLoop {
             GameTime.update();
             accumulator += GameTime.getDeltaTime();
 
-            final double frameTime = 1.0 / Config.get("targetFPS", Integer.class);;
-
+            final double frameTime = GameTime.getFrameTime();
             while (accumulator >= frameTime) {
                 update();
                 accumulator -= frameTime;
