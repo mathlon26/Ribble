@@ -4,10 +4,6 @@ import com.github.mathlon26.ribble.core.RibbleGame;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            new RibbleGame().start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new ExampleGame();
     }
 }

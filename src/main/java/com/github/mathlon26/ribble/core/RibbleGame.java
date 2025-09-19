@@ -7,11 +7,11 @@ public class RibbleGame {
         m_engine = Engine.getInstance();
     }
 
-    public void start() {
+    protected void start() {
         m_engine.start();
     }
 
-    public void stop() {
+    protected void stop() {
         m_engine.stop();
     }
 }
