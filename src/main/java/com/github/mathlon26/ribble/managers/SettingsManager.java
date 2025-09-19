@@ -1,5 +1,6 @@
 package com.github.mathlon26.ribble.managers;
 
+import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -63,7 +64,7 @@ public class SettingsManager {
                 Type mapType = new TypeToken<Map<String, Object>>(){}.getType();
                 loaded = gson.fromJson(reader, mapType);
             } catch (IOException e) {
-                throw new RuntimeException("SettingsManager::loadSettings -> IOException -> RuntimeException " + e);
+                ExceptionHandler.raise(RuntimeException.class, "SettingsManager::loadSettings -> IOException -> RuntimeException " + e);
             }
         }
 
@@ -92,7 +93,7 @@ public class SettingsManager {
         try (FileWriter writer = new FileWriter(DEFAULT_FILE_PATH)) {
             gson.toJson(currentSettings, writer);
         } catch (IOException e) {
-            throw new RuntimeException("SettingsManager::saveSettings -> IOException -> RuntimeException " + e);
+            ExceptionHandler.raise(RuntimeException.class, "SettingsManager::saveSettings -> IOException -> RuntimeException " + e);
         }
     }
 

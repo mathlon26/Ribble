@@ -18,6 +18,7 @@ public final class Logger {
     private static volatile Logger instance;
     private LogLevel level;
     private PrintWriter fileWriter;
+    private String lastMessage;
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -69,11 +70,16 @@ public final class Logger {
     }
 
     private void out(String msg) {
+        lastMessage = msg;
         System.out.println(msg);
 
         if (fileWriter != null) {
             fileWriter.println(msg);
         }
+    }
+
+    public String getLastMessage() {
+        return lastMessage;
     }
 
     public void debug(String message) {
@@ -91,6 +97,20 @@ public final class Logger {
     public void error(String message) {
         log(LogLevel.ERROR, message);
     }
+
+    public <T extends Exception> void raise(Class<T> exceptionClass, String message) throws T {
+        log(LogLevel.ERROR, message);
+        T exception;
+        try {
+            exception = exceptionClass.getDeclaredConstructor(String.class).newInstance(message);
+        } catch (ReflectiveOperationException e) {
+            error("Failed to create exception instance");
+            throw new RuntimeException(getLastMessage(), e);
+        }
+        throw exception;
+    }
+
+
 
     public void close() {
         instance.out("--- Ending the log ---\n");

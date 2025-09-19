@@ -1,6 +1,8 @@
 package com.github.mathlon26.ribble.graphics;
 
 import com.github.mathlon26.ribble.core.Config;
+import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
+import com.github.mathlon26.ribble.io.output.sys.Logger;
 import com.github.mathlon26.ribble.math.Vector2D;
 import com.github.mathlon26.ribble.math.physics.Color;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -57,7 +59,7 @@ public class Window {
     public void show() {
         m_glfwErrorCallback = GLFWErrorCallback.createPrint(System.err).set();
         if (!glfwInit()) {
-            throw new IllegalStateException("Unable to initialize GLFW.");
+            ExceptionHandler.raise(IllegalStateException.class, "Unable to initialize GLFW.");
         }
 
         glfwDefaultWindowHints();
@@ -67,7 +69,7 @@ public class Window {
 
         m_glfwWindowPointer = glfwCreateWindow((int) m_size.getX(), (int) m_size.getY(), m_title, 0, 0);
         if (m_glfwWindowPointer == GLFW_PLATFORM_NULL) {
-            throw new IllegalStateException("Failed to create the GLFW window.");
+            ExceptionHandler.raise(IllegalStateException.class, "Failed to create the GLFW window.");
         }
 
         setCallbacks();
