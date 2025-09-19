@@ -11,4 +11,7 @@ public class RibbleGame {
         m_engine.start();
     }
 
+    public void stop() {
+        m_engine.stop();
+    }
 }

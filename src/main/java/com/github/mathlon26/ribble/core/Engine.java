@@ -1,8 +1,6 @@
 package com.github.mathlon26.ribble.core;
 
 import com.github.mathlon26.ribble.graphics.Window;
-import com.github.mathlon26.ribble.math.Vector2D;
-import com.github.mathlon26.ribble.math.physics.Color;
 
 public class Engine {
     private static Engine m_instance;

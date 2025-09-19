@@ -1,7 +1,5 @@
 package com.github.mathlon26.ribble.managers;
 
-import com.github.mathlon26.ribble.core.Ribble;
-import com.github.mathlon26.ribble.math.physics.Color;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
@@ -55,7 +53,6 @@ public class SettingsManager {
         currentSettings.put(key, value);
     }
 
-    @SuppressWarnings("unchecked")
     public void loadSettings() {
         File file = new File(DEFAULT_FILE_PATH);
         currentSettings.clear();

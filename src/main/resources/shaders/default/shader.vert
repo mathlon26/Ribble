@@ -1,4 +1,3 @@
-#begin Vertex
 #version 330 core
 
 layout (location=0) in vec3 aPos;
@@ -11,18 +10,3 @@ void main()
     fColor = aColor;
     gl_Position = vec4(aPos, 1.0);
 }
-#end
-
-
-#begin Fragment
-#version 330 core
-
-in vec4 fColor;
-
-out vec4 color;
-
-void main()
-{
-    color = fColor;
-}
-#end
