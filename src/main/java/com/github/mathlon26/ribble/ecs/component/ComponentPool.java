@@ -21,6 +21,9 @@ public class ComponentPool<T extends Component> {
         /*
         Maybe add support for the same component more than once later
          */
+        if(entity == null) {
+            ExceptionHandler.raise(IllegalArgumentException.class, "Can not add component to Null entity");
+        }
 
         T currentComponent = components.get(entity);
         if(currentComponent == null)
