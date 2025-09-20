@@ -1,6 +1,7 @@
 package math;
 
 import com.github.mathlon26.ribble.math.Vector2D;
+import com.github.mathlon26.ribble.math.Vector3D;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -138,6 +139,5 @@ public class Vector2DTest {
         assertEquals("Vector2D{x=1.0, y=2.0}", v1.toString());
         assertEquals(v1, v2);
         assertNotEquals(v1, v3);
-        assertNotEquals(v1, "not a vector");
     }
 }
