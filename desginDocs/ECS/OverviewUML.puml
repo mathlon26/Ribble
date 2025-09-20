@@ -1,0 +1,56 @@
+@startuml
+abstract class Entity{
+    + ID : Integer
+}
+abstract class "Component (Data only)"{
+
+}
+
+class ExampleComponent{
+    + x : Float
+    + y : Float
+    + z : Float
+}
+
+"Component (Data only)" <|-- ExampleComponent
+
+abstract class "System (No data)"{
+    + {abstract} void start()
+    + {abstract} void update()
+    + {abstract} void destroy()
+}
+
+class ExampleSystem{
+
+}
+"System (No data)" <|-- ExampleSystem
+
+class ComponentPool {
+    - m_components : Component List
+
+}
+
+class SystemManager {
+    - m_systemPool : System Set
+}
+
+
+class EntityManager{
+    - m_entities : Entity Set
+    - m_componentPools : ComponentPool Set
+    - m_systemManager : SystemManager
+
+    + void createEntity()
+    + void destroyEntity(Entity toDestroy)
+    + Component[] getComponents<T>()
+    + Component[] getComponent<T>(Entity entity)
+    + {method} ...
+}
+
+ExampleComponent --* ComponentPool
+ExampleSystem --* SystemManager
+Entity --* EntityManager
+ComponentPool --* EntityManager
+SystemManager --* EntityManager
+
+@enduml

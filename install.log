@@ -1,0 +1,9 @@
+[13:57:14 2025-09-20] FETCHING Version 2.42.0
+[13:57:14 2025-09-20] DOWNLOADING https://github.com/spicetify/cli/releases/download/v2.42.0/spicetify-2.42.0-linux-amd64.tar.gz
+[13:57:15 2025-09-20] EXTRACTING /home/joost/.spicetify/spicetify.tar.gz
+[13:57:15 2025-09-20] SETTING EXECUTABLE PERMISSIONS TO /home/joost/.spicetify/spicetify
+[13:57:15 2025-09-20] REMOVING /home/joost/.spicetify/spicetify.tar.gz
+[13:57:15 2025-09-20] spicetify path already set in /home/joost/.bashrc, continuing...
+[13:57:15 2025-09-20] spicetify path already set in /home/joost/.bash_profile, continuing...
+[13:57:15 2025-09-20] spicetify v2.42.0 was installed successfully to /home/joost/.spicetify
+[13:57:15 2025-09-20] Run 'spicetify --help' to get started
