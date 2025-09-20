@@ -1,4 +1,4 @@
 package com.github.mathlon26.ribble.ecs.component;
 
-public class Component {
+public abstract class Component{
 }
