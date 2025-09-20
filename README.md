@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-**Ribble** is a (student) Java game engine project, designed as a learning / experimental engine for 3D graphics, rendering, input handling, and entity systems.
+**Ribble** is a (student) Java game engine project, designed as a learning / experimental engine for 2D graphics, rendering, input handling, and entity systems.
 
 ---
 
