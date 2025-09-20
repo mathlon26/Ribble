@@ -36,7 +36,7 @@ public class EntityManager {
     private EntityPool entityPool;
 
     @Getter @Setter
-    private List<ComponentPool> componentPools;
+    private List<ComponentPool<?>> componentPools;
 
     @Getter @Setter
     private SystemManager systemManager;
@@ -48,7 +48,7 @@ public class EntityManager {
     public EntityManager() {
     }
 
-    public EntityManager(EntityPool entityPool, List<ComponentPool> componentPools, SystemManager systemManager) {
+    public EntityManager(EntityPool entityPool, List<ComponentPool<?>> componentPools, SystemManager systemManager) {
         this.entityPool = entityPool;
         this.componentPools = componentPools;
         this.systemManager = systemManager;
@@ -111,7 +111,7 @@ public class EntityManager {
         if (componentPools == null || componentPools.isEmpty()) return null;
 
         // Try direct call if ComponentPool declares get(Entity)
-        for (ComponentPool pool : componentPools) {
+        for (ComponentPool<?> pool : componentPools) {
             if (pool == null) continue;
 
             // 1) Try common signature pool.get(Entity)
