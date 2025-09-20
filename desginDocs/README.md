@@ -7,4 +7,6 @@ This section contains all design documents used for developing the engine
 All uml diagrams are written in PlantUML.
 
 ## Editing UML
-You are free to use any PlantUML editor you want. I recommend installing the plantuml4idea plugin when using IntelIJ
+You are free to use any PlantUML editor you want. I recommend installing the plantuml4idea plugin when using IntelIJ.
+
+For PlantUML syntax go to [this](https://plantuml.com/class-diagram) link.
