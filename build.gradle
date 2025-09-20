@@ -76,6 +76,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        exceptionFormat "full"      // show full stack traces
+        showCauses true             // show exception causes
+        showExceptions true         // show exception messages
+        showStackTraces true        // show stack traces
+    }
 }
 
 // Print info
