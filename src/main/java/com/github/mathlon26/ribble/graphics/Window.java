@@ -76,9 +76,11 @@ public class Window {
 
         glfwMakeContextCurrent(m_glfwWindowPointer);
         glfwSwapInterval(1);
-        glfwShowWindow(m_glfwWindowPointer);
 
         GL.createCapabilities();
+        glfwShowWindow(m_glfwWindowPointer);
+
+
 
         glViewport(0, 0, (int)m_size.getX(), (int) m_size.getY());
     }
