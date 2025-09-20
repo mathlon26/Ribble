@@ -1,0 +1,147 @@
+@startuml
+' =====================================
+' DIAGRAM 1: ECS STRUCTURE
+' =====================================
+
+abstract class Entity {
+    + ID : Integer
+}
+
+abstract class "Component (Data only)" {
+}
+
+abstract class "System (No data)" {
+    + {abstract} void start()
+    + {abstract} void update()
+    + {abstract} void destroy()
+}
+
+' --- Example Entities ---
+class GameObject {
+    + name : String
+    + isActive : Boolean
+}
+
+class UIObject {
+    + uiName : String
+    + isVisible : Boolean
+}
+
+Entity <|-- GameObject
+Entity <|-- UIObject
+
+' --- Example Components ---
+class TransformComponent {
+    + x : Float
+    + y : Float
+    + z : Float
+}
+
+class RenderComponent {
+    + meshID : Integer
+    + textureID : Integer
+}
+
+class UIComponent {
+    + width : Integer
+    + height : Integer
+    + anchor : String
+}
+
+"Component (Data only)" <|-- TransformComponent
+"Component (Data only)" <|-- RenderComponent
+"Component (Data only)" <|-- UIComponent
+
+' --- Example Systems ---
+class RenderSystem {
+    + void start()
+    + void update()
+    + void destroy()
+}
+
+class UISystem {
+    + void start()
+    + void update()
+    + void destroy()
+}
+
+"System (No data)" <|-- RenderSystem
+"System (No data)" <|-- UISystem
+
+' --- Managers ---
+class ComponentPool {
+    - m_components : Component List
+}
+
+class SystemManager {
+    - m_systemPool : System Set
+    + void updateAll()
+}
+
+class EntityManager {
+    - m_entities : Entity Set
+    - m_componentPools : ComponentPool Set
+    - m_systemManager : SystemManager
+
+    + Entity createEntity()
+    + void destroyEntity(Entity toDestroy)
+    + Component[] getComponents<T>()
+    + Component getComponent<T>(Entity entity)
+    + void update()
+}
+
+' --- Relationships ---
+TransformComponent --* ComponentPool
+RenderComponent --* ComponentPool
+UIComponent --* ComponentPool
+
+RenderSystem --* SystemManager
+UISystem --* SystemManager
+
+Entity --* EntityManager
+ComponentPool --* EntityManager
+SystemManager --* EntityManager
+
+@enduml
+
+@startuml
+' =====================================
+' DIAGRAM 2: EXTENDED RUNTIME FLOW
+' =====================================
+
+actor GameLoop
+
+GameLoop --> EntityManager : update()
+
+EntityManager --> SystemManager : updateAll()
+
+' --- RenderSystem flow ---
+SystemManager --> RenderSystem : update()
+RenderSystem --> EntityManager : query Entities with Transform + Render
+EntityManager --> GameObject : return matching Entities
+RenderSystem --> TransformComponent : read position (x,y,z)
+RenderSystem --> RenderComponent : read mesh + texture
+RenderSystem --> GameLoop : draw object to screen
+
+' --- UISystem flow ---
+SystemManager --> UISystem : update()
+UISystem --> EntityManager : query Entities with UIComponent
+EntityManager --> UIObject : return matching Entities
+UISystem --> UIComponent : read width, height, anchor
+UISystem --> GameLoop : draw UI elements
+
+' Notes for clarity
+note over RenderSystem
+  For each Entity:
+   - Get TransformComponent
+   - Get RenderComponent
+   - Issue draw call
+end note
+
+note over UISystem
+  For each Entity:
+   - Get UIComponent
+   - Place + render UI
+end note
+
+@enduml
