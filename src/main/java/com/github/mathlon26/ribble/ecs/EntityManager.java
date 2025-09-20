@@ -48,6 +48,9 @@ public class EntityManager {
     private static EntityManager s_instance;
 
     public EntityManager() {
+        systemManager = new SystemManager();
+        componentPools = new ComponetPoolSet();
+        entityPool = new EntityPool();
     }
 
     public EntityManager(EntityPool entityPool, ComponetPoolSet componentPools, SystemManager systemManager) {
@@ -117,7 +120,7 @@ public class EntityManager {
         if (componentPools == null) {return null;}
         // get the component from the correct pool
         ComponentPool<T> pool = componentPools.getPool(type);
-
+        if(pool == null){return null;}
         return pool.getComponent(entity);
     }
     @SuppressWarnings("unchecked")
@@ -127,6 +130,12 @@ public class EntityManager {
 
         Class<T> type = (Class<T>) component.getClass();
         ComponentPool<T> pool = componentPools.getPool(type);
+
+        // add a new pool if it does not exist
+        if(pool == null)
+        {
+            pool = componentPools.addPool(type);
+        }
         pool.addComponent(entity, component);
     }
 
