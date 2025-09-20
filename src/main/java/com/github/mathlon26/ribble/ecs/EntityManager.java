@@ -2,9 +2,11 @@ package com.github.mathlon26.ribble.ecs;
 
 import com.github.mathlon26.ribble.ecs.component.Component;
 import com.github.mathlon26.ribble.ecs.component.ComponentPool;
+import com.github.mathlon26.ribble.ecs.component.ComponetPoolSet;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.ecs.entity.EntityPool;
 import com.github.mathlon26.ribble.ecs.system.SystemManager;
+import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +38,7 @@ public class EntityManager {
     private EntityPool entityPool;
 
     @Getter @Setter
-    private List<ComponentPool> componentPools;
+    private ComponetPoolSet componentPools;
 
     @Getter @Setter
     private SystemManager systemManager;
@@ -46,9 +48,12 @@ public class EntityManager {
     private static EntityManager s_instance;
 
     public EntityManager() {
+        systemManager = new SystemManager();
+        componentPools = new ComponetPoolSet();
+        entityPool = new EntityPool();
     }
 
-    public EntityManager(EntityPool entityPool, List<ComponentPool> componentPools, SystemManager systemManager) {
+    public EntityManager(EntityPool entityPool, ComponetPoolSet componentPools, SystemManager systemManager) {
         this.entityPool = entityPool;
         this.componentPools = componentPools;
         this.systemManager = systemManager;
@@ -100,68 +105,40 @@ public class EntityManager {
         return e;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T extends Component> T getComponent(Entity entity) {
-        return (T) getInstance().getComponentFor(entity);
+    public static <T extends Component> T getComponent(Entity entity, Class<T> type) {
+        return getInstance().getComponentFor(entity, type);
+    }
+    public static <T extends Component> void addComponent(Entity entity, T component)
+    {
+        getInstance().addComponentTo(entity, component);
     }
 
+
+
+    public <T extends Component> T getComponentFor(Entity entity, Class<T> type) {
+        if (entity == null) {return null;}
+        if (componentPools == null) {return null;}
+        // get the component from the correct pool
+        ComponentPool<T> pool = componentPools.getPool(type);
+        if(pool == null){return null;}
+        return pool.getComponent(entity);
+    }
     @SuppressWarnings("unchecked")
-    public <T extends Component> T getComponentFor(Entity entity) {
-        if (entity == null) return null;
-        if (componentPools == null || componentPools.isEmpty()) return null;
+    public <T extends Component> void addComponentTo(Entity entity, T component)
+    {
+        if(componentPools == null) {ExceptionHandler.raise(NullPointerException.class, "Initialisation went wrong!");}
 
-        // Try direct call if ComponentPool declares get(Entity)
-        for (ComponentPool pool : componentPools) {
-            if (pool == null) continue;
+        Class<T> type = (Class<T>) component.getClass();
+        ComponentPool<T> pool = componentPools.getPool(type);
 
-            // 1) Try common signature pool.get(Entity)
-            try {
-                Method m = pool.getClass().getMethod("get", Entity.class);
-                Object res = m.invoke(pool, entity);
-                if (res != null) return (T) res;
-            } catch (NoSuchMethodException ignored) {
-            } catch (IllegalAccessException | InvocationTargetException ignored) {
-            }
-
-            // 2) Try pool.get(int entityId)
-            int entityId = extractEntityId(entity);
-            if (entityId >= 0) {
-                try {
-                    Method m = pool.getClass().getMethod("get", int.class);
-                    Object res = m.invoke(pool, entityId);
-                    if (res != null) return (T) res;
-                } catch (NoSuchMethodException ignored) {
-                } catch (IllegalAccessException | InvocationTargetException ignored) {
-                }
-            }
-
-            // 3) Try alternate names with Entity parameter
-            String[] altNames = {"getComponent", "getForEntity", "getByEntity", "getComponentForEntity", "find", "findByEntity"};
-            for (String name : altNames) {
-                try {
-                    Method m = pool.getClass().getMethod(name, Entity.class);
-                    Object res = m.invoke(pool, entity);
-                    if (res != null) return (T) res;
-                } catch (NoSuchMethodException ignored) {
-                } catch (IllegalAccessException | InvocationTargetException ignored) {
-                }
-            }
-
-            // 4) Try alternate names with int parameter
-            for (String name : altNames) {
-                try {
-                    Method m = pool.getClass().getMethod(name, int.class);
-                    Object res = m.invoke(pool, entityId);
-                    if (res != null) return (T) res;
-                } catch (NoSuchMethodException ignored) {
-                } catch (IllegalAccessException | InvocationTargetException ignored) {
-                }
-            }
+        // add a new pool if it does not exist
+        if(pool == null)
+        {
+            pool = componentPools.addPool(type);
         }
-
-        // not found
-        return null;
+        pool.addComponent(entity, component);
     }
+
 
     private int extractEntityId(Entity entity) {
         if (entity == null) return -1;
