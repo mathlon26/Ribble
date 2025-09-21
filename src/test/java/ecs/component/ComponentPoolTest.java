@@ -1,5 +1,6 @@
 package ecs.component;
 
+import com.github.mathlon26.ribble.ecs.EntityManager;
 import com.github.mathlon26.ribble.ecs.component.ComponentPool;
 import com.github.mathlon26.ribble.ecs.component.RenderComponent;
 import com.github.mathlon26.ribble.ecs.component.TransformComponent;
@@ -7,8 +8,10 @@ import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.math.Transform;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import java.util.Collection;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ComponentPoolTest {
 
@@ -35,6 +38,44 @@ public class ComponentPoolTest {
         assertNotEquals(null, transformPool.getComponent(entity1));
         assertNotEquals(transform1, transformPool.getComponent(entity2));
     }
+
+    @Test
+    void testGetComponentsStandalone()
+    {
+        ComponentPool<TransformComponent> pool = new ComponentPool<>();
+
+        Entity entity = new Entity(0);
+        TransformComponent trans = new TransformComponent(new Transform());
+
+        pool.addComponent(entity, trans);
+
+        List<TransformComponent> expected = List.of(trans);
+
+        Collection<TransformComponent> components = pool.getComponents();
+
+        assertTrue(components.containsAll(expected));
+        assertTrue(expected.containsAll(components));
+        assertNotEquals(null, components);
+    }
+
+    @Test
+    void testGetComponents()
+    {
+        EntityManager man = new EntityManager();
+        Entity entity = man.createEntityInstance();
+        TransformComponent trans = new TransformComponent(new Transform());
+        man.addComponentTo(entity, trans);
+
+        List<TransformComponent> expected = List.of(trans);
+        Collection<TransformComponent> components = man.getComponentsInst(TransformComponent.class);
+
+        assertTrue(components.containsAll(expected));
+        assertTrue(expected.containsAll(components));
+        assertNotEquals(null, components);
+
+    }
+
+
 
 
 

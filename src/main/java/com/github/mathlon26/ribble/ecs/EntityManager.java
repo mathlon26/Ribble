@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Collection;
 
 /**
  * Simple EntityManager façade for creating entities and retrieving components.
@@ -108,6 +109,13 @@ public class EntityManager {
     public static <T extends Component> T getComponent(Entity entity, Class<T> type) {
         return getInstance().getComponentFor(entity, type);
     }
+
+    public static <T extends Component> Collection<T> getComponents(Class<T> type)
+    {
+        return getInstance().getComponentsInst(type);
+    }
+
+
     public static <T extends Component> void addComponent(Entity entity, T component)
     {
         getInstance().addComponentTo(entity, component);
@@ -123,6 +131,18 @@ public class EntityManager {
         if(pool == null){return null;}
         return pool.getComponent(entity);
     }
+    // Instance version of getComponents
+    public <T extends Component> Collection<T> getComponentsInst(Class<T> type)
+    {
+        ComponentPool<T> pool = componentPools.getPool(type);
+
+        if (pool == null) {
+            ExceptionHandler.raise(IllegalArgumentException.class, "No Component pool of type: " + type.getName());
+            return null;
+        }
+        return pool.getComponents();
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends Component> void addComponentTo(Entity entity, T component)
     {
