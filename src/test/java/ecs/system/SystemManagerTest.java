@@ -12,7 +12,7 @@ public class SystemManagerTest {
     {
         SystemManager man = new SystemManager();
 
-        TestSystemBase sys = new TestSystemBase();
+        TestSystem sys = new TestSystem();
 
         man.addSystem(sys);
 
@@ -30,7 +30,7 @@ public class SystemManagerTest {
         TestComponent comp = new TestComponent(0);
 
         man.addComponentToEntity(comp, entity1);
-        man.addSystem(new TestSystemBase());
+        man.addSystem(new TestSystem());
 
         man.update(1.0);
     }
