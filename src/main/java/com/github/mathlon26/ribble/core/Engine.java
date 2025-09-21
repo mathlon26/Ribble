@@ -23,11 +23,15 @@ public class Engine {
     public void start() {
         Config.init();
         m_logger = Logger.getInstance(Config.get("logPath", String.class));
-        m_logger.info("Starting Ribble Game Engine");
+
+        m_logger.info("Started Ribble Game Engine | Engine::start");
+        Logger.getInstance().info("Loaded settings | Config::init");
         m_window = new Window();
         m_gameLoop = new GameLoop(m_window);
 
         m_window.show();
+        Logger.getInstance().info("Window created and shown | Window::show");
+
         m_gameLoop.start();
     }
 
@@ -41,6 +45,8 @@ public class Engine {
             m_window.destroy();
         }
         if (m_logger != null) {
+            Logger.getInstance().info("Game loop ended | GameLoop::cleanUp");
+            Logger.getInstance().info("Ribble Game engine stopped | Engine::shutdown");
             m_logger.close();
         }
     }

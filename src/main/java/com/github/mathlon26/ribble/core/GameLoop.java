@@ -2,6 +2,7 @@ package com.github.mathlon26.ribble.core;
 
 import com.github.mathlon26.ribble.core.time.GameTime;
 import com.github.mathlon26.ribble.graphics.Window;
+import com.github.mathlon26.ribble.io.output.sys.Logger;
 
 public class GameLoop {
 
@@ -27,6 +28,7 @@ public class GameLoop {
 
     public void start() {
         m_running = true;
+        Logger.getInstance().info("Game loop started by engine | GameLoop::start");
         GameTime.init();
 
         double accumulator = 0;
