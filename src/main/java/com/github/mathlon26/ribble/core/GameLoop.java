@@ -11,16 +11,13 @@ public class GameLoop {
     private boolean m_running;
     private int m_targetFPS;
 
-    public GameLoop(Window window, int targetFPS) {
+    public GameLoop(Window window) {
         m_engine = Engine.getInstance();
         m_window = window;
         m_targetFPS = Config.get("targetFPS", Integer.class);
         m_running = false;
     }
 
-    public GameLoop(Window window) {
-        this(window, Ribble.FPS_60);
-    }
 
     public int getTargetFPS() {
         return m_targetFPS;

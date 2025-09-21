@@ -1,13 +1,20 @@
 package com.github.mathlon26.ribble.core.time;
 
 import com.github.mathlon26.ribble.core.Config;
+import lombok.Getter;
 
 public class GameTime {
+    @Getter
     private static double lastTime;
+    @Getter
     private static double deltaTime;
+    @Getter
     private static double time;
+
     private static double frameTime;
+    @Getter
     private static double startTime;
+    @Getter
     private static double elapsedTime;
 
     public static void init() {
@@ -27,21 +34,7 @@ public class GameTime {
         elapsedTime = now - startTime;
     }
 
-    public static double getDeltaTime() {
-        return deltaTime;
-    }
-
-    public static double getTime() {
-        return time;
-    }
-
-    public static double getElapsedTime() {
-        return elapsedTime;
-    }
-
-    public static double getFrameTime() {
-        return frameTime;
-    }
+    public static double getFrameTime() { return 1.0 / Config.get("targetFPS", Integer.class); }
 
     private static double getCurrentTime() {
         return System.nanoTime() / 1_000_000_000.0; // convert ns to seconds
