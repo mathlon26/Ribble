@@ -5,6 +5,7 @@ import com.github.mathlon26.ribble.ecs.EntityManager;
 import com.github.mathlon26.ribble.graphics.Renderer;
 import com.github.mathlon26.ribble.graphics.Window;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
+import com.github.mathlon26.ribble.managers.SceneManager;
 
 public class Engine {
     private static Engine m_instance;
@@ -34,6 +35,9 @@ public class Engine {
         m_gameLoop = new GameLoop(m_window);
         m_window.show();
         Logger.getInstance().info("Window created and shown | Window::show");
+
+        SceneManager.getInstance().loadMainScene();
+        Logger.getInstance().info("Loading main scene | GameLoop::start");
 
         m_gameLoop.start();
     }

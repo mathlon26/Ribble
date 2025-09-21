@@ -13,11 +13,13 @@ public class TestSystem extends SystemBase {
 
     @Override
     public void update(double deltatime) {
-        for(TestComponent comp : EntityManager.getInstance().getComponentsOfType(TestComponent.class))
-        {
-            comp.setTestvalue(comp.getTestValue()+1);
-            Logger.getInstance().info(""+comp.getTestValue());
-        }
+//        for(TestComponent comp : EntityManager.getInstance().getComponentsOfType(TestComponent.class))
+//        {
+//            comp.setTestvalue(comp.getTestValue()+1);
+//            Logger.getInstance().info(""+comp.getTestValue());
+//        }
+
+        Logger.getInstance().info("Deltatime: " + deltatime);
     }
 
     @Override

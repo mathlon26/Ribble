@@ -14,7 +14,7 @@ public class Config {
         settings.createDefaultSetting("windowSize", Ribble.WINDOW_SIZE_HD);
         settings.createDefaultSetting("windowTitle", "Ribble Game Engine");
         settings.createDefaultSetting("windowBgColor", Color.Black());
-        settings.createDefaultSetting("targetFPS", Ribble.FPS_60);
+        settings.createDefaultSetting("targetFPS", Ribble.NO_LIMIT_FPS);
         settings.createDefaultSetting("vSync", true);
         settings.createDefaultSetting("masterVolume", Ribble.AUDIO_SET_MAX);
     }

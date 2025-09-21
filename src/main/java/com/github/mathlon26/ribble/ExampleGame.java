@@ -6,6 +6,10 @@ public class ExampleGame extends RibbleGame {
     public ExampleGame() {
         super();
 
+        setMainScene(
+                new ExampleScene()
+        );
+
         start();
     }
 }

@@ -3,6 +3,8 @@ package com.github.mathlon26.ribble.core;
 import com.github.mathlon26.ribble.core.time.GameTime;
 import com.github.mathlon26.ribble.graphics.Window;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
+import com.github.mathlon26.ribble.managers.SceneManager;
+import com.github.mathlon26.ribble.scene.Scene;
 
 public class GameLoop {
 

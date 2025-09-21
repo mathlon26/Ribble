@@ -8,7 +8,7 @@ public class Ribble {
     public static int FPS_240 = 240;
     public static int FPS_120 = 120;
     public static int FPS_60 = 60;
-    public static int NO_LIMIT_FPS = -1;
+    public static int NO_LIMIT_FPS = 1000000000;
 
     // Window Sizes (Width x Height)
     public static Vector2D WINDOW_SIZE_HD = new Vector2D(1280, 720);

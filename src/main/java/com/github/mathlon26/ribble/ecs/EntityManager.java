@@ -147,4 +147,17 @@ public class EntityManager {
     public <T extends SystemBase> void addSystem(T system) {
         systemManager.addSystem(system);
     }
+
+    public void destroyCurrentSystems() {
+        systemManager.destroyAll();
+    }
+
+    public void destroyCurrentComponents() {
+        componentPools = new ComponentPoolSet();
+    }
+
+    public void destroyCurrentEntities() {
+        for (Entity e : getAllEntities())
+            destroyEntity(e);
+    }
 }
