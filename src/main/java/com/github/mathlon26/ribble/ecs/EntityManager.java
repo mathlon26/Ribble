@@ -5,6 +5,7 @@ import com.github.mathlon26.ribble.ecs.component.ComponentPool;
 import com.github.mathlon26.ribble.ecs.component.ComponetPoolSet;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.ecs.entity.EntityPool;
+import com.github.mathlon26.ribble.ecs.system.System;
 import com.github.mathlon26.ribble.ecs.system.SystemManager;
 import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 import lombok.Getter;
@@ -155,6 +156,18 @@ public class EntityManager {
 
         return -1;
     }
+
+    public void addSystem(System system)
+    {
+        getInstance().addSystemInst(system);
+    }
+    // instance version of addSystem
+    public void addSystemInst(System system)
+    {
+        systemManager.addSystem(system);
+    }
+
+
 
     /**
      * Convenience: call systemManager update. Attempts to call common update method names.
