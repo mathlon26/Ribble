@@ -9,7 +9,7 @@ public class TestSystemBase extends SystemBase {
     }
 
     @Override
-    public void update() {
+    public void update(double deltatime) {
         // TODO set TestComponent values
     }
 

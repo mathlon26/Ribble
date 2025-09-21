@@ -24,9 +24,9 @@ public class SystemManager {
         }
     }
 
-    public void updateAll() {
+    public void updateAll(double deltatime) {
         for(SystemBase systemBase : systemBasePool) {
-            systemBase.update();
+            systemBase.update(deltatime);
         }
     }
 

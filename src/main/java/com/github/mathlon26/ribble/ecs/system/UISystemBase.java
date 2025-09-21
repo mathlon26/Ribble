@@ -11,7 +11,7 @@ public class UISystemBase extends SystemBase {
     }
 
     @Override
-    public void update() {
+    public void update(double deltatime) {
 
     }
 

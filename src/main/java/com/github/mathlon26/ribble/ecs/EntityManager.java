@@ -119,9 +119,9 @@ public class EntityManager {
     /**
      * Update systems by delegating to the SystemManager.
      */
-    public void update() {
+    public void update(double deltatime) {
         if (systemManager == null) return;
-        systemManager.updateAll();
+        systemManager.updateAll(deltatime);
     }
 
     /**

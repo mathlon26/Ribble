@@ -32,7 +32,7 @@ public class SystemManagerTest {
         man.addComponentToEntity(comp, entity1);
         man.addSystem(new TestSystemBase());
 
-        man.update();
+        man.update(1.0);
     }
 
 }

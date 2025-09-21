@@ -1,6 +1,8 @@
 package com.github.mathlon26.ribble.core;
 
 import com.github.mathlon26.ribble.core.time.GameTime;
+import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.graphics.Renderer;
 import com.github.mathlon26.ribble.graphics.Window;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
 
@@ -10,6 +12,7 @@ public class Engine {
     private Logger m_logger;
     private GameLoop m_gameLoop;
     private Window m_window;
+    private Renderer m_renderer;
 
     private Engine() {}
 
@@ -27,8 +30,8 @@ public class Engine {
         m_logger.info("Started Ribble Game Engine | Engine::start");
         Logger.getInstance().info("Loaded settings | Config::init");
         m_window = new Window();
+        m_renderer = new Renderer();
         m_gameLoop = new GameLoop(m_window);
-
         m_window.show();
         Logger.getInstance().info("Window created and shown | Window::show");
 
@@ -52,8 +55,10 @@ public class Engine {
     }
 
     public void updateSystems(double deltaTime) {
+        EntityManager.getInstance().update(deltaTime);
     }
 
     public void renderSystems() {
+        m_renderer.render();
     }
 }
