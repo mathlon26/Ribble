@@ -40,7 +40,7 @@ ribble
 ├── ecs
 │   ├── component
 │   ├── entity
-│   └── system
+│   └── systemBase
 ├── graphics
 │   ├── camera
 │   ├── material
@@ -82,7 +82,7 @@ ribble
 
 ## Build System
 
-Ribble uses **Gradle** as its build system. Key info:
+Ribble uses **Gradle** as its build systemBase. Key info:
 
 - There is a `build.gradle` in the root which defines dependencies, compile tasks, etc.
 - The project is structured following the standard Gradle / Java conventions (`src/main/java/...`).
@@ -112,7 +112,7 @@ Some of the learning goals / potential future enhancements:
 
 - Clean, maintainable code structure; separation of concerns.
 - Stable rendering pipeline: cameras (2D, 3D), meshes, materials, shaders.
-- A working entity system to allow flexible architectures.
+- A working entity systemBase to allow flexible architectures.
 - Input abstraction: mouse, keyboard, touchpad, controller, microphone listeners.
 - Math library that supports geometry, physics, numerics, etc.
 - Possibly extend with audio, scene management, animations, maybe networking / UI.

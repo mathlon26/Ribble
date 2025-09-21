@@ -1,7 +1,7 @@
 package com.github.mathlon26.ribble.ecs.system;
 
-public class UISystem extends System{
-    public UISystem() {
+public class RenderSystemBase extends SystemBase {
+    public RenderSystemBase() {
         super();
     }
 

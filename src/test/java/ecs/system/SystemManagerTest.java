@@ -12,7 +12,7 @@ public class SystemManagerTest {
     {
         SystemManager man = new SystemManager();
 
-        TestSystem sys = new TestSystem();
+        TestSystemBase sys = new TestSystemBase();
 
         man.addSystem(sys);
 
@@ -24,15 +24,15 @@ public class SystemManagerTest {
     {
         // TODO test for value change
 
-        EntityManager man = new EntityManager();
+        EntityManager man = EntityManager.getInstance();
 
-        Entity entity1 = man.createEntityInstance();
+        Entity entity1 = man.createEntity();
         TestComponent comp = new TestComponent(0);
 
-        man.addComponentTo(entity1, comp);
-        man.addSystemInst(new TestSystem());
+        man.addComponentToEntity(comp, entity1);
+        man.addSystem(new TestSystemBase());
 
-        man.updateSystems();
+        man.update();
     }
 
 }

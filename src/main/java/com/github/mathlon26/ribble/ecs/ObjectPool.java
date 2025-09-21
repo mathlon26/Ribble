@@ -1,5 +1,7 @@
 package com.github.mathlon26.ribble.ecs;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -44,6 +46,7 @@ public abstract class ObjectPool<T> implements Iterable<T> {
         return m_pool.stream();
     }
 
+    @NotNull
     @Override
     public Iterator<T> iterator() {
         return m_pool.iterator();

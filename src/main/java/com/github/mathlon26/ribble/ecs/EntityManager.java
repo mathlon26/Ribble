@@ -5,35 +5,16 @@ import com.github.mathlon26.ribble.ecs.component.ComponentPool;
 import com.github.mathlon26.ribble.ecs.component.ComponentPoolSet;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.ecs.entity.EntityPool;
-import com.github.mathlon26.ribble.ecs.system.System;
+import com.github.mathlon26.ribble.ecs.system.SystemBase;
 import com.github.mathlon26.ribble.ecs.system.SystemManager;
-import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Simple EntityManager façade for creating entities and retrieving components.
- * <p>
- * Two usage styles are supported:
- * 1) Instance style:
- *    EntityManager mgr = new EntityManager(...);
- *    mgr.createEntity();
- *    mgr.getComponent(entity);
- *
- * 2) Static convenience style:
- *    EntityManager.setInstance(mgr);
- *    EntityManager.createEntity();
- *    EntityManager.getComponent(entity);
- *
- * The getComponent methods use reflection fallbacks to work with different ComponentPool APIs
- * (e.g. get(Entity), get(int), getComponent(Entity), getForEntity(...)).
- */
 public class EntityManager {
     @Getter @Setter
     private EntityPool entityPool;
@@ -44,168 +25,35 @@ public class EntityManager {
     @Getter @Setter
     private SystemManager systemManager;
 
-    private final AtomicInteger idCounter = new AtomicInteger(1);
+    // long to match your Entity(long id)
+    private final AtomicLong idCounter = new AtomicLong(1);
 
     private static EntityManager s_instance;
 
-    public EntityManager() {
-        systemManager = new SystemManager();
-        componentPools = new ComponentPoolSet();
-        entityPool = new EntityPool();
-    }
-
-    public EntityManager(EntityPool entityPool, ComponentPoolSet componentPools, SystemManager systemManager) {
+    private EntityManager(EntityPool entityPool, ComponentPoolSet componentPools, SystemManager systemManager) {
         this.entityPool = entityPool;
         this.componentPools = componentPools;
         this.systemManager = systemManager;
     }
 
-    public static void setInstance(EntityManager instance) {
-        s_instance = instance;
+    private EntityManager() {
+        this(new EntityPool(), new ComponentPoolSet(), new SystemManager());
     }
 
-    private static EntityManager getInstance() {
+    public static EntityManager getInstance() {
         if (s_instance == null) {
             s_instance = new EntityManager();
         }
         return s_instance;
     }
 
-    public static Entity createEntity() {
-        return getInstance().createEntityInstance();
-    }
-
-    public Entity createEntityInstance() {
-        int id = idCounter.getAndIncrement();
-        Entity e = new Entity(id);
-
-        if (entityPool != null) {
-            try {
-                // prefer an "add" method if present
-                Method addMethod = entityPool.getClass().getMethod("add", Entity.class);
-                addMethod.invoke(entityPool, e);
-            } catch (NoSuchMethodException nsme) {
-                // try an "add" with generic type (some implementations might name it differently)
-                try {
-                    Method addMethod = entityPool.getClass().getMethod("add", Object.class);
-                    addMethod.invoke(entityPool, e);
-                } catch (Exception ignored) {
-                    // last resort: try to call a commonly used "register" or "create" method
-                    try {
-                        Method reg = entityPool.getClass().getMethod("register", Entity.class);
-                        reg.invoke(entityPool, e);
-                    } catch (Exception ignored2) {
-                        // give up silently — entity still returned to caller
-                    }
-                }
-            } catch (IllegalAccessException | InvocationTargetException ignored) {
-                // ignore; still return entity
-            }
-        }
-
-        return e;
-    }
-
-    public static <T extends Component> T getComponent(Entity entity, Class<T> type) {
-        return getInstance().getComponentFor(entity, type);
-    }
-
-    public static <T extends Component> Collection<T> getComponents(Class<T> type)
-    {
-        return getInstance().getComponentsInst(type);
-    }
-
-
-    public static <T extends Component> void addComponent(Entity entity, T component)
-    {
-        getInstance().addComponentTo(entity, component);
-    }
-
-
-
-    public <T extends Component> T getComponentFor(Entity entity, Class<T> type) {
-        if (entity == null) {return null;}
-        if (componentPools == null) {return null;}
-        // get the component from the correct pool
-        ComponentPool<T> pool = componentPools.getPool(type);
-        if(pool == null){return null;}
-        return pool.getComponent(entity);
-    }
-    // Instance version of getComponents
-    public <T extends Component> Collection<T> getComponentsInst(Class<T> type)
-    {
-        ComponentPool<T> pool = componentPools.getPool(type);
-
-        if (pool == null) {
-            ExceptionHandler.raise(IllegalArgumentException.class, "No Component pool of type: " + type.getName());
-            return null;
-        }
-        return pool.getComponents();
-    }
-
-    @SuppressWarnings("unchecked")
-    public <T extends Component> void addComponentTo(Entity entity, T component)
-    {
-        if(componentPools == null) {ExceptionHandler.raise(NullPointerException.class, "Initialisation went wrong!");}
-
-        Class<T> type = (Class<T>) component.getClass();
-        ComponentPool<T> pool = componentPools.getPool(type);
-
-        // add a new pool if it does not exist
-        if(pool == null)
-        {
-            pool = componentPools.addPool(type);
-        }
-        pool.addComponent(entity, component);
-    }
-
-
-    private int extractEntityId(Entity entity) {
-        if (entity == null) return -1;
-        try {
-            // prefer a getId() method if present
-            Method m = entity.getClass().getMethod("getId");
-            Object o = m.invoke(entity);
-            if (o instanceof Number) {
-                return ((Number) o).intValue();
-            }
-        } catch (NoSuchMethodException ignored) {
-        } catch (IllegalAccessException | InvocationTargetException ignored) {
-        }
-
-        return -1;
-    }
-
-    public void addSystem(System system)
-    {
-        getInstance().addSystemInst(system);
-    }
-    // instance version of addSystem
-    public void addSystemInst(System system)
-    {
-        systemManager.addSystem(system);
-    }
-
-
-
-    /**
-     * Convenience: call systemManager update. Attempts to call common update method names.
-     */
-    public void updateSystems() {
-        if (systemManager == null) return;
-
-        try {
-            Method m = systemManager.getClass().getMethod("update");
-            m.invoke(systemManager);
-            return;
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
-        }
-
-        try {
-            Method m2 = systemManager.getClass().getMethod("updateAll");
-            m2.invoke(systemManager);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
-        }
+    public static EntityManager getInstance(EntityPool entityPool, ComponentPoolSet componentPools, SystemManager systemManager) {
+        EntityManager em = getInstance();
+        em.setEntityPool(entityPool);
+        em.setComponentPools(componentPools);
+        em.setSystemManager(systemManager);
+        s_instance = em;
+        return s_instance;
     }
 
     @Override
@@ -214,6 +62,89 @@ public class EntityManager {
                 "entityPool=" + Objects.toString(entityPool) +
                 ", componentPools=" + Objects.toString(componentPools) +
                 ", systemManager=" + Objects.toString(systemManager) +
+                ", localEntities=" + entityPool.size() +
                 '}';
+    }
+
+    /**
+     * Create a new Entity with a unique id and register it locally.
+     */
+    public Entity createEntity() {
+        long id = idCounter.getAndIncrement();
+        Entity e = new Entity(id);
+        entityPool.add(e);
+        return e;
+    }
+
+    /**
+     * Remove an entity from the manager's local set.
+     */
+    public void destroyEntity(Entity toDestroy) {
+        if (toDestroy == null) return;
+        entityPool.remove(toDestroy);
+    }
+
+    /**
+     * Get the component of type T attached to the given entity.
+     * Uses componentPools.getPool(type).get(entity)
+     *
+     * @param type   component class
+     * @param entity entity
+     * @param <T>    component type
+     * @return component instance or null
+     */
+    public <T extends Component> T getComponentFromEntity(Class<T> type, Entity entity) {
+        if (componentPools == null || type == null || entity == null) return null;
+        ComponentPool<T> pool = componentPools.getPool(type);
+        if (pool == null) return null;
+        return pool.getComponent(entity);
+    }
+
+    /**
+     * Get all components of the given type.
+     * Uses componentPools.getPool(type).getAll()
+     *
+     * @param type component class
+     * @param <T>  component type
+     * @return collection of components (empty if none or unsupported)
+     */
+    public <T extends Component> Collection<T> getComponentsOfType(Class<T> type) {
+        if (componentPools == null || type == null) return Collections.emptyList();
+        ComponentPool<T> pool = componentPools.getPool(type);
+        if (pool == null) return Collections.emptyList();
+        Collection<T> all = pool.getAll();
+        return (all != null) ? all : Collections.emptyList();
+    }
+
+    /**
+     * Update systems by delegating to the SystemManager.
+     */
+    public void update() {
+        if (systemManager == null) return;
+        systemManager.updateAll();
+    }
+
+    /**
+     * Expose entities (read-only).
+     */
+    public Collection<Entity> getAllEntities() {
+        return Collections.unmodifiableSet(entityPool.getAll());
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T extends Component> void addComponentToEntity(T component, Entity entity) {
+        Class<T> type = (Class<T>) component.getClass();
+
+        ComponentPool<T> pool = componentPools.getPool(type);
+        if (pool == null) {
+            componentPools.addPool(type);
+            pool = componentPools.getPool(type);
+        }
+
+        pool.addComponent(entity, component);
+    }
+
+    public <T extends SystemBase> void addSystem(T system) {
+        systemManager.addSystem(system);
     }
 }

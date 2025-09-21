@@ -51,9 +51,7 @@ public class ComponentPool<T extends Component> {
     }
 
 
-
-
-
-
-
+    public Collection<T> getAll() {
+        return components.values();
+    }
 }

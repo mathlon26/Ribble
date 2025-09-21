@@ -61,13 +61,13 @@ public class ComponentPoolTest {
     @Test
     void testGetComponents()
     {
-        EntityManager man = new EntityManager();
-        Entity entity = man.createEntityInstance();
+        EntityManager man = EntityManager.getInstance();
+        Entity entity = man.createEntity();
         TransformComponent trans = new TransformComponent(new Transform());
-        man.addComponentTo(entity, trans);
+        man.addComponentToEntity(trans, entity);
 
         List<TransformComponent> expected = List.of(trans);
-        Collection<TransformComponent> components = man.getComponentsInst(TransformComponent.class);
+        Collection<TransformComponent> components = man.getComponentsOfType(TransformComponent.class);
 
         assertTrue(components.containsAll(expected));
         assertTrue(expected.containsAll(components));

@@ -15,14 +15,14 @@ public class EntityManagerTest {
     void TestComponents()
     {
         // Create a local entitymanager
-        EntityManager man = new EntityManager();
+        EntityManager man = EntityManager.getInstance();
 
-        Entity entity1 = man.createEntityInstance();
+        Entity entity1 = man.createEntity();
         TransformComponent transform = new TransformComponent(new Transform());
 
-        man.addComponentTo(entity1, transform);
+        man.addComponentToEntity(transform, entity1);
 
-        assertEquals(transform, man.getComponentFor(entity1, TransformComponent.class));
+        assertEquals(transform, man.getComponentFromEntity(TransformComponent.class, entity1));
 
     }
 }
