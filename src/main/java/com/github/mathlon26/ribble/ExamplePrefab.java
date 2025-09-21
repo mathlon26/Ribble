@@ -22,4 +22,14 @@ public class ExamplePrefab extends Prefab {
                 new ExampleComponent()
         );
     }
+
+    @Override
+    public void onLoad() {
+
+    }
+
+    @Override
+    public void onDestroy() {
+
+    }
 }

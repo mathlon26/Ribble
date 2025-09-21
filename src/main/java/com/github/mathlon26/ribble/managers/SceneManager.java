@@ -12,8 +12,8 @@ import java.util.Collection;
 public class SceneManager {
     private static SceneManager s_instance;
     private final EntityManager m_entityManager = EntityManager.getInstance();
-    private Scene m_mainScene;
-    private Scene m_currentScene;
+    private Scene m_mainScene = null;
+    private Scene m_currentScene = null;
 
     public static SceneManager getInstance() {
         if (s_instance == null) {
@@ -38,21 +38,39 @@ public class SceneManager {
     }
 
     public void loadScene(Scene scene) {
+        destroyCurrentScene();
         m_currentScene = scene;
+        loadCurrentScene();
+    }
+
+    public void destroyCurrentScene() {
+
+        if (m_currentScene != null) {
+            m_currentScene.onDestroy();
+            for (Prefab prefab : m_currentScene.getPrefabs())
+                prefab.onDestroy();
+        }
         m_entityManager.destroyCurrentSystems();
         m_entityManager.destroyCurrentComponents();
         m_entityManager.destroyCurrentEntities();
+        m_currentScene = null;
+    }
 
-        Collection<SystemBase> systems = scene.getSystems();
+    private void loadCurrentScene() {
+        m_currentScene.onLoad();
+
+        Collection<SystemBase> systems = m_currentScene.getSystems();
         for (SystemBase s : systems)
             m_entityManager.addSystem(s);
 
-        Collection<Prefab> prefabs = scene.getPrefabs();
+        Collection<Prefab> prefabs = m_currentScene.getPrefabs();
         for (Prefab prefab : prefabs) {
+            prefab.onLoad();
             Entity entity = m_entityManager.createEntity();
             for (Component component : prefab.getComponents())
                 m_entityManager.addComponentToEntity(component, entity);
             prefab.setEntity(entity);
         }
     }
+
 }

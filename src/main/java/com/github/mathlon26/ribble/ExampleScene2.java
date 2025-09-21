@@ -1,11 +1,13 @@
 package com.github.mathlon26.ribble;
 
+import com.github.mathlon26.ribble.core.Engine;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
 import com.github.mathlon26.ribble.managers.SceneManager;
+import com.github.mathlon26.ribble.math.physics.Color;
 import com.github.mathlon26.ribble.scene.Scene;
 
-public class ExampleScene extends Scene {
-    public ExampleScene() {
+public class ExampleScene2 extends Scene {
+    public ExampleScene2() {
         super();
     }
 
@@ -18,18 +20,19 @@ public class ExampleScene extends Scene {
 
     @Override
     protected void systemSetup() {
-        addSystem(
-                new ExampleSystem()
-        );
+
     }
 
     @Override
     public void onLoad() {
-        Logger.getInstance().info("ExampleScene loaded");
+        Logger.getInstance().info("ExampleScene 2 loaded");
+        Engine.getInstance().getWindow().setBackgroundColor(
+                Color.Green()
+        );
     }
 
     @Override
     public void onDestroy() {
-        Logger.getInstance().info("ExampleScene destroyed");
+        Logger.getInstance().info("ExampleScene 2 destroyed");
     }
 }

@@ -19,7 +19,8 @@ public abstract class Scene {
 
     protected abstract void prefabSetup();
     protected abstract void systemSetup();
-
+    public abstract void onLoad();
+    public abstract void onDestroy();
 
 
     public List<SystemBase> getSystems() { return m_systems; }

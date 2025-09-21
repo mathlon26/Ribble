@@ -1,6 +1,5 @@
 package com.github.mathlon26.ribble.core;
 
-import com.github.mathlon26.ribble.core.time.GameTime;
 import com.github.mathlon26.ribble.ecs.EntityManager;
 import com.github.mathlon26.ribble.graphics.Renderer;
 import com.github.mathlon26.ribble.graphics.Window;
@@ -29,18 +28,20 @@ public class Engine {
         m_logger = Logger.getInstance(Config.get("logPath", String.class));
 
         m_logger.info("Started Ribble Game Engine | Engine::start");
-        Logger.getInstance().info("Loaded settings | Config::init");
+        m_logger.info("Loaded settings | Config::init");
+
         m_window = new Window();
         m_renderer = new Renderer();
         m_gameLoop = new GameLoop(m_window);
         m_window.show();
-        Logger.getInstance().info("Window created and shown | Window::show");
+
+        m_logger.info("Window created and shown | Window::show");
 
         SceneManager.getInstance().loadMainScene();
-        Logger.getInstance().info("Loading main scene | GameLoop::start");
 
         m_gameLoop.start();
     }
+
 
     public void stop() {
         m_gameLoop.stop();
@@ -48,6 +49,8 @@ public class Engine {
 
 
     public void shutdown() {
+        SceneManager.getInstance().destroyCurrentScene();
+
         if (m_window != null) {
             m_window.destroy();
         }
@@ -64,5 +67,11 @@ public class Engine {
 
     public void renderSystems() {
         m_renderer.render();
+    }
+
+
+    // Just for testing
+    public Window getWindow() {
+        return m_window;
     }
 }

@@ -47,6 +47,7 @@ public class GameLoop {
             render();
         }
 
+
         cleanup();
     }
 

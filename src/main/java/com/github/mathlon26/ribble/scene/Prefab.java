@@ -20,6 +20,8 @@ public abstract class Prefab {
     }
 
     protected abstract void componentSetup();
+    public abstract void onLoad();
+    public abstract void onDestroy();
 
     protected <T extends Component> void addComponent(T component) {
         m_components.add(component);
@@ -32,6 +34,8 @@ public abstract class Prefab {
     public void setEntity(Entity entity) {
         m_entity = entity;
     }
+
+
 
     public long getEntityID() { return m_entity.getId(); }
 }
