@@ -4,6 +4,7 @@ import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class ComponentPool<T extends Component> {

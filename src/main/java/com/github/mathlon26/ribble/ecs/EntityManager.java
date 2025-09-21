@@ -2,7 +2,7 @@ package com.github.mathlon26.ribble.ecs;
 
 import com.github.mathlon26.ribble.ecs.component.Component;
 import com.github.mathlon26.ribble.ecs.component.ComponentPool;
-import com.github.mathlon26.ribble.ecs.component.ComponetPoolSet;
+import com.github.mathlon26.ribble.ecs.component.ComponentPoolSet;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.ecs.entity.EntityPool;
 import com.github.mathlon26.ribble.ecs.system.System;
@@ -13,7 +13,6 @@ import lombok.Setter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Collection;
@@ -40,7 +39,7 @@ public class EntityManager {
     private EntityPool entityPool;
 
     @Getter @Setter
-    private ComponetPoolSet componentPools;
+    private ComponentPoolSet componentPools;
 
     @Getter @Setter
     private SystemManager systemManager;
@@ -51,11 +50,11 @@ public class EntityManager {
 
     public EntityManager() {
         systemManager = new SystemManager();
-        componentPools = new ComponetPoolSet();
+        componentPools = new ComponentPoolSet();
         entityPool = new EntityPool();
     }
 
-    public EntityManager(EntityPool entityPool, ComponetPoolSet componentPools, SystemManager systemManager) {
+    public EntityManager(EntityPool entityPool, ComponentPoolSet componentPools, SystemManager systemManager) {
         this.entityPool = entityPool;
         this.componentPools = componentPools;
         this.systemManager = systemManager;
