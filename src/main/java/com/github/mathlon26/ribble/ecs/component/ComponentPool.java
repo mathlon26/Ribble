@@ -12,7 +12,7 @@ public class ComponentPool<T extends Component> {
 
     }
 
-    private final HashMap<Entity, T> components = new HashMap<Entity, T>();
+    private final HashMap<Entity, T> components = new HashMap<>();
 
     public Collection<T> getComponents()
     {

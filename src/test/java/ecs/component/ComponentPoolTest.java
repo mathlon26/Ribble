@@ -36,7 +36,7 @@ public class ComponentPoolTest {
 
         assertEquals(transform1, transformPool.getComponent(entity1));
         assertNotEquals(null, transformPool.getComponent(entity1));
-        assertNotEquals(transform1, transformPool.getComponent(entity2));
+        assertNotSame(transform1, transformPool.getComponent(entity2));
     }
 
     @Test
@@ -70,13 +70,11 @@ public class ComponentPoolTest {
         Collection<TransformComponent> components = man.getComponentsOfType(TransformComponent.class);
 
         assertTrue(components.containsAll(expected));
+
         assertTrue(expected.containsAll(components));
+
         assertNotEquals(null, components);
 
     }
-
-
-
-
 
 }

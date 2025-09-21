@@ -6,12 +6,10 @@ import java.util.HashMap;
 public class ComponentPoolSet {
     private final HashMap<Class<? extends Component>, ComponentPool<? extends Component>> pools = new HashMap<>();
 
-    public <T extends Component> ComponentPool<T> addPool(Class<T> type) {
+    public <T extends Component> void addPool(Class<T> type) {
         ComponentPool<T> pool = new ComponentPool<T>();
 
         pools.put(type, pool);
-
-        return pool;
     }
 
     @SuppressWarnings("unchecked")
