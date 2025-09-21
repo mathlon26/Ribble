@@ -27,7 +27,7 @@ public class ExampleScene2 extends Scene {
     public void onLoad() {
         Logger.getInstance().info("ExampleScene 2 loaded");
         Engine.getInstance().getWindow().setBackgroundColor(
-                Color.Green()
+                Color.White()
         );
     }
 
