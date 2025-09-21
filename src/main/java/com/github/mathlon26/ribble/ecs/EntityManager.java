@@ -138,6 +138,7 @@ public class EntityManager {
 
         if (pool == null) {
             ExceptionHandler.raise(IllegalArgumentException.class, "No Component pool of type: " + type.getName());
+            return null;
         }
         return pool.getComponents();
     }
