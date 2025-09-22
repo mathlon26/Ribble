@@ -11,6 +11,7 @@ public class Material {
     @Setter
     @Getter
     private Shader shader;
+
     @Setter
     @Getter
     private Texture2D texture;

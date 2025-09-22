@@ -20,4 +20,16 @@ public class Entity {
     public Entity() {
         this.id = EntityManager.getInstance().createEntity().getId();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Entity other)) return false;
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Long.hashCode(id);
+    }
 }
