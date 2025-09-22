@@ -75,7 +75,7 @@ public class GLFWListener {
         windowSizeCallback = new GLFWWindowSizeCallback() {
             @Override
             public void invoke(long window, int width, int height) {
-                Engine.getInstance().getWindow().setSize(width, height);
+                WindowListener.windowSizeCallback(window, width, height);
             }
         };
         glfwSetWindowSizeCallback(glfwWindow, windowSizeCallback);

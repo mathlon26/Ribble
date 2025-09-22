@@ -10,8 +10,6 @@ public class GameTime {
     private static double deltaTime;
     @Getter
     private static double time;
-
-    private static double frameTime;
     @Getter
     private static double startTime;
     @Getter
@@ -23,7 +21,6 @@ public class GameTime {
         time = 0;
         startTime = getCurrentTime();
         elapsedTime = 0;
-        frameTime = 1.0 / Config.get("targetFPS", Integer.class);
     }
 
     public static void update() {
