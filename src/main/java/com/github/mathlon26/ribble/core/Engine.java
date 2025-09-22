@@ -1,10 +1,17 @@
 package com.github.mathlon26.ribble.core;
 
+import com.github.mathlon26.ribble.assets.AssetLoader;
+import com.github.mathlon26.ribble.assets.ShaderAssetLoader;
+import com.github.mathlon26.ribble.graphics.shader.ShaderType;
 import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.graphics.Renderer;
 import com.github.mathlon26.ribble.graphics.Window;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
 import com.github.mathlon26.ribble.managers.SceneManager;
+
+import java.util.Map;
+
+import static org.lwjgl.opengl.GL20.glUseProgram;
 
 public class Engine {
     private static Engine m_instance;
@@ -25,6 +32,7 @@ public class Engine {
 
     public void start() {
         Config.init();
+
         m_logger = Logger.getInstance(Config.get("logPath", String.class));
 
         m_logger.info("Started Ribble Game Engine | Engine::start");
@@ -34,10 +42,13 @@ public class Engine {
         m_renderer = new Renderer();
         m_gameLoop = new GameLoop(m_window);
         m_window.show();
+        // after intialising OpenGL load all the assets that depend on opengl
+        AssetLoader.getInstance().loadGLDependant();
 
         m_logger.info("Window created and shown | Window::show");
 
         SceneManager.getInstance().loadMainScene();
+
 
         m_gameLoop.start();
     }
