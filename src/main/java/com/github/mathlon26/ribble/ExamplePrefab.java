@@ -1,7 +1,7 @@
 package com.github.mathlon26.ribble;
 
-import com.github.mathlon26.ribble.ecs.component.TransformComponent;
-import com.github.mathlon26.ribble.math.Transform;
+import com.github.mathlon26.ribble.ecs.component.components.Transform3DComponent;
+import com.github.mathlon26.ribble.math.Transform3D;
 import com.github.mathlon26.ribble.scene.Prefab;
 
 public class ExamplePrefab extends Prefab {
@@ -13,8 +13,8 @@ public class ExamplePrefab extends Prefab {
     @Override
     protected void componentSetup() {
         addComponent(
-                new TransformComponent(
-                        new Transform()
+                new Transform3DComponent(
+                        new Transform3D()
                 )
         );
 

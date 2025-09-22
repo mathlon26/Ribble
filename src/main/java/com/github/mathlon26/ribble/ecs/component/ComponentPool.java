@@ -6,6 +6,7 @@ import com.github.mathlon26.ribble.io.output.sys.ExceptionHandler;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 public class ComponentPool<T extends Component> {
     public ComponentPool() {
@@ -53,5 +54,10 @@ public class ComponentPool<T extends Component> {
 
     public Collection<T> getAll() {
         return components.values();
+    }
+
+    // Returns a set of all entities linked to the component type of this pool
+    public Set<Entity> getEntities() {
+        return components.keySet();
     }
 }

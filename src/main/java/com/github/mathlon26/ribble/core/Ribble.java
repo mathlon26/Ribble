@@ -23,6 +23,10 @@ public class Ribble {
     public static Vector2D WINDOW_SIZE_HDPI_MOBILE = new Vector2D(1080, 1920);
     public static Vector2D WINDOW_SIZE_MDPI_MOBILE = new Vector2D(720, 1280);
 
+    // Camera
+    public static float CAM_NEAR_CLIP_DEFAULT = -1000f;
+    public static float CAM_FAR_CLIP_DEFAULT = 1000f;
+
     // Audio
     public static float AUDIO_SET_MAX = 1.0f;
     public static float AUDIO_SET_ZERO = 0.0f;

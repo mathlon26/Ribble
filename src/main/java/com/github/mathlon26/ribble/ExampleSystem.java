@@ -1,7 +1,7 @@
 package com.github.mathlon26.ribble;
 
 import com.github.mathlon26.ribble.core.Engine;
-import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.ecs.system.SystemBase;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
 import com.github.mathlon26.ribble.managers.SceneManager;
