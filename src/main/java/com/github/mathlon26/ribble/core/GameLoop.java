@@ -2,7 +2,9 @@ package com.github.mathlon26.ribble.core;
 
 import com.github.mathlon26.ribble.core.time.GameTime;
 import com.github.mathlon26.ribble.graphics.Window;
+import com.github.mathlon26.ribble.io.input.devices.KeyBoardKey;
 import com.github.mathlon26.ribble.io.input.listeners.GLFWListener;
+import com.github.mathlon26.ribble.io.input.listeners.KeyboardListener;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
 import com.github.mathlon26.ribble.managers.SceneManager;
 import com.github.mathlon26.ribble.scene.Scene;
@@ -45,15 +47,19 @@ public class GameLoop {
                 accumulator -= frameTime;
             }
 
-            GLFWListener.endFrame();
             render();
+            GLFWListener.endFrame();
         }
-
 
         cleanup();
     }
 
     private void update() {
+
+        if (KeyboardListener.isKeyPressed(KeyBoardKey.A)) {
+            Logger.getInstance().info("Key pressed: A");
+        }
+
         m_engine.updateSystems(GameTime.getDeltaTime());
     }
 

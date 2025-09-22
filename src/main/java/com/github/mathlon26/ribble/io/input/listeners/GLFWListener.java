@@ -24,11 +24,12 @@ public class GLFWListener {
     }
 
     public static void init() {
-        s_instance.setCallbacks();
+
+        getInstance().setCallbacks();
     }
 
     public static void endFrame() {
-        s_instance.setCallbacks();
+        getInstance().callEndFrameOnListeners();
     }
 
     private void callEndFrameOnListeners() {
