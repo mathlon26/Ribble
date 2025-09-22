@@ -47,6 +47,8 @@ public class Window {
 
     public Color getBackgroundColor() { return m_bgColor; }
 
+    public void setSize(int width, int height) { m_size.setValues(width, height); }
+
     public void setTitle(String title) {
         m_title = title;
         if (m_glfwWindowPointer != 0) {
