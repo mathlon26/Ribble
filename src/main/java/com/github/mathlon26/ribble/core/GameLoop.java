@@ -55,11 +55,6 @@ public class GameLoop {
     }
 
     private void update() {
-
-        if (KeyboardListener.isKeyPressed(KeyBoardKey.A)) {
-            Logger.getInstance().info("Key pressed: A");
-        }
-
         m_engine.updateSystems(GameTime.getDeltaTime());
     }
 
