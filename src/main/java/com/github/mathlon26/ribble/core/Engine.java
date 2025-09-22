@@ -1,5 +1,6 @@
 package com.github.mathlon26.ribble.core;
 
+import com.github.mathlon26.ribble.io.input.listeners.GLFWListener;
 import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.graphics.Renderer;
 import com.github.mathlon26.ribble.graphics.Window;
@@ -36,6 +37,9 @@ public class Engine {
         m_window.show();
 
         m_logger.info("Window created and shown | Window::show");
+
+        GLFWListener.init();
+        m_logger.info("Started listening to GLFW input callbacks | GLFWListener::init");
 
         SceneManager.getInstance().loadMainScene();
 
