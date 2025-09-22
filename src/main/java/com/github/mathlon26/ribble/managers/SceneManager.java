@@ -1,6 +1,6 @@
 package com.github.mathlon26.ribble.managers;
 
-import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.ecs.component.Component;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.ecs.system.SystemBase;
@@ -57,7 +57,6 @@ public class SceneManager {
     }
 
     private void loadCurrentScene() {
-        m_currentScene.onLoad();
 
         Collection<SystemBase> systems = m_currentScene.getSystems();
         for (SystemBase s : systems)
@@ -65,12 +64,16 @@ public class SceneManager {
 
         Collection<Prefab> prefabs = m_currentScene.getPrefabs();
         for (Prefab prefab : prefabs) {
-            prefab.onLoad();
             Entity entity = m_entityManager.createEntity();
             for (Component component : prefab.getComponents())
                 m_entityManager.addComponentToEntity(component, entity);
             prefab.setEntity(entity);
+
+            prefab.onLoad();
+
         }
+
+        m_currentScene.onLoad();
     }
 
 }

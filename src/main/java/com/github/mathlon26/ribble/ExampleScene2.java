@@ -14,7 +14,7 @@ public class ExampleScene2 extends Scene {
     @Override
     protected void prefabSetup() {
         addPrefab(
-                new ExamplePrefab()
+                new CameraPrefab()
         );
     }
 

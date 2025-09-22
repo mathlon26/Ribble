@@ -3,9 +3,9 @@ package ecs.component;
 import com.github.mathlon26.ribble.ecs.EntityManager;
 import com.github.mathlon26.ribble.ecs.component.ComponentPool;
 import com.github.mathlon26.ribble.ecs.component.RenderComponent;
-import com.github.mathlon26.ribble.ecs.component.TransformComponent;
+import com.github.mathlon26.ribble.ecs.component.components.Transform3DComponent;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
-import com.github.mathlon26.ribble.math.Transform;
+import com.github.mathlon26.ribble.math.Transform3D;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -25,11 +25,11 @@ public class ComponentPoolTest {
     @Test
     void testAddComponent()
     {
-        ComponentPool<TransformComponent> transformPool = new ComponentPool<>();
+        ComponentPool<Transform3DComponent> transformPool = new ComponentPool<>();
         Entity entity1 = new Entity(0);
         Entity entity2 = new Entity(1);
-        TransformComponent transform1 = new TransformComponent(new Transform());
-        TransformComponent transform2 = new TransformComponent(new Transform());
+        Transform3DComponent transform1 = new Transform3DComponent(new Transform3D());
+        Transform3DComponent transform2 = new Transform3DComponent(new Transform3D());
 
         transformPool.addComponent(entity1, transform1);
         transformPool.addComponent(entity2, transform2);
@@ -42,16 +42,16 @@ public class ComponentPoolTest {
     @Test
     void testGetComponentsStandalone()
     {
-        ComponentPool<TransformComponent> pool = new ComponentPool<>();
+        ComponentPool<Transform3DComponent> pool = new ComponentPool<>();
 
         Entity entity = new Entity(0);
-        TransformComponent trans = new TransformComponent(new Transform());
+        Transform3DComponent trans = new Transform3DComponent(new Transform3D());
 
         pool.addComponent(entity, trans);
 
-        List<TransformComponent> expected = List.of(trans);
+        List<Transform3DComponent> expected = List.of(trans);
 
-        Collection<TransformComponent> components = pool.getComponents();
+        Collection<Transform3DComponent> components = pool.getComponents();
 
         assertTrue(components.containsAll(expected));
         assertTrue(expected.containsAll(components));
@@ -63,11 +63,11 @@ public class ComponentPoolTest {
     {
         EntityManager man = EntityManager.getInstance();
         Entity entity = man.createEntity();
-        TransformComponent trans = new TransformComponent(new Transform());
+        Transform3DComponent trans = new Transform3DComponent(new Transform3D());
         man.addComponentToEntity(trans, entity);
 
-        List<TransformComponent> expected = List.of(trans);
-        Collection<TransformComponent> components = man.getComponentsOfType(TransformComponent.class);
+        List<Transform3DComponent> expected = List.of(trans);
+        Collection<Transform3DComponent> components = man.getComponentsOfType(Transform3DComponent.class);
 
         assertTrue(components.containsAll(expected));
 

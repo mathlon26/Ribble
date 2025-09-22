@@ -4,18 +4,18 @@ package com.github.mathlon26.ribble.math;
  * Represents a position, rotation and scale in 3D space.
  * Rotation is stored as a Quaternion.
  */
-public class Transform {
+public class Transform3D {
     private Vector3D position;
     private Quaternion rotation;
     private Vector3D scale;
 
-    public Transform() {
+    public Transform3D() {
         this.position = new Vector3D(0.0, 0.0, 0.0);
         this.rotation = new Quaternion(); // identity quaternion
         this.scale = new Vector3D(1.0, 1.0, 1.0);
     }
 
-    public Transform(Vector3D position, Quaternion rotation, Vector3D scale) {
+    public Transform3D(Vector3D position, Quaternion rotation, Vector3D scale) {
         this.position = position != null ? position : new Vector3D(0.0, 0.0, 0.0);
         this.rotation = rotation != null ? rotation : new Quaternion();
         this.scale = scale != null ? scale : new Vector3D(1.0, 1.0, 1.0);
