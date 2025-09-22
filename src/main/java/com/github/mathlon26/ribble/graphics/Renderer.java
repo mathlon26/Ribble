@@ -41,10 +41,9 @@ public class Renderer {
             Matrix2D viewProjection = buildViewMatrix(cameraTransformComponent);
             Matrix2D model = buildModelMatrix(transform);
             Matrix2D mvp = Matrix2D.multiply(viewProjection, model);
-            material.getShader().setUniformMatrix("u_MVP", mvp);
+            //material.getShader().setUniformMatrix("u_MVP", mvp);
 
             // meshRenderer.drawQuad(sprite.getSourceRect());
-            material.unbind();
         }
 
 

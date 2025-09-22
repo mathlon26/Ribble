@@ -10,32 +10,26 @@ public class Material {
     // getters and setters
     @Setter
     @Getter
-    private Shader shader;
+    private long shaderID;
     @Setter
     @Getter
     private Texture2D texture;
     private Color colorTint;
     private int renderLayer;
 
-    public Material(Shader shader, Texture2D texture) {
-        this.shader = shader;
+    public Material(long shaderID, Texture2D texture) {
+        this.shaderID = shaderID;
         this.texture = texture;
         this.colorTint = Color.White();
         this.renderLayer = 0;
     }
 
     public void bind() {
-        shader.bind();
         if (texture != null) {
             texture.bind();
-            shader.setUniform1i("u_Texture", texture.getSlot());
+            // setUniform1i
         }
-        shader.setUniform4f("u_ColorTint", colorTint);
-    }
-
-    public void unbind() {
-        if (texture != null) texture.unbind();
-        shader.unbind();
+        // setUniform4f
     }
 
     public Color getColorTint() { return colorTint; }
