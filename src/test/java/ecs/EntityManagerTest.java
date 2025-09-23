@@ -1,6 +1,6 @@
 package ecs;
 
-import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.ecs.component.components.Transform3DComponent;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.math.Transform3D;

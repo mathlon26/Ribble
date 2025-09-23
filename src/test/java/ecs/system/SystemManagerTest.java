@@ -1,7 +1,7 @@
 package ecs.system;
 
 import com.github.mathlon26.ribble.ecs.entity.Entity;
-import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.ecs.system.SystemManager;
 import ecs.component.TestComponent;
 import org.junit.jupiter.api.Test;

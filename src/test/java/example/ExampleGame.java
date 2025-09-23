@@ -1,9 +1,7 @@
 package example;
 
-import com.github.mathlon26.ribble.core.Config;
-import com.github.mathlon26.ribble.core.Ribble;
 import com.github.mathlon26.ribble.core.RibbleGame;
-import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import ecs.component.TestComponent;
 import ecs.system.TestSystem;

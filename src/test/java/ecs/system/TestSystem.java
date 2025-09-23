@@ -1,9 +1,7 @@
 package ecs.system;
 
-import com.github.mathlon26.ribble.ecs.EntityManager;
 import com.github.mathlon26.ribble.ecs.system.SystemBase;
 import com.github.mathlon26.ribble.io.output.sys.Logger;
-import ecs.component.TestComponent;
 
 public class TestSystem extends SystemBase {
     @Override

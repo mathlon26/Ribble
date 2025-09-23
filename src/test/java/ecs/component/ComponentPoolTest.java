@@ -1,8 +1,8 @@
 package ecs.component;
 
-import com.github.mathlon26.ribble.ecs.EntityManager;
+import com.github.mathlon26.ribble.ecs.component.components.Transform2DComponent;
+import com.github.mathlon26.ribble.managers.EntityManager;
 import com.github.mathlon26.ribble.ecs.component.ComponentPool;
-import com.github.mathlon26.ribble.ecs.component.RenderComponent;
 import com.github.mathlon26.ribble.ecs.component.components.Transform3DComponent;
 import com.github.mathlon26.ribble.ecs.entity.Entity;
 import com.github.mathlon26.ribble.math.Transform3D;
@@ -18,7 +18,7 @@ public class ComponentPoolTest {
     @Test
     void testConstructor()
     {
-        ComponentPool<RenderComponent> renderPool = new ComponentPool<>();
+        ComponentPool<Transform2DComponent> renderPool = new ComponentPool<>();
         // No idea how to actually test
     }
 
