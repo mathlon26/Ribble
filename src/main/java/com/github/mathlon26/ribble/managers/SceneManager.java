@@ -73,7 +73,7 @@ public class SceneManager {
 
         }
 
-        m_currentScene.onLoad();
+        m_currentScene.load();
     }
 
 }

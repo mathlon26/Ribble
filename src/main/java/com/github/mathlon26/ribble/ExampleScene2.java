@@ -20,7 +20,7 @@ public class ExampleScene2 extends Scene {
 
     @Override
     protected void systemSetup() {
-
+        addSystem(new ExampleBGSystem());
     }
 
     @Override

@@ -17,6 +17,13 @@ public abstract class Scene {
         systemSetup();
     }
 
+    public void load() {
+        onLoad();
+        for (SystemBase s : m_systems) {
+            s.start();
+        }
+    }
+
     protected abstract void prefabSetup();
     protected abstract void systemSetup();
     public abstract void onLoad();
